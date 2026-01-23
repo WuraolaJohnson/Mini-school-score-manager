@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Manager</title>
+
+
+</head>
+
+<body>
+    <div>
+        <p id="display"></p>
+    </div>
+    <div>
+        <h1>Student Registration Form</h1>
+        <form id="studentForm">
+            <input type="text" id="name" placeholder="Student Name" required />
+            <input type="number" id="score" placeholder="Score" required />
+            <button type="submit">Add Student</button>
+        </form>
+
+        <div>
+            <h2>Student Full List and Score</h2>
+            <ul id="studentList"></ul>
+            <h4 id="average"></h4>
+        </div>
+
+        <div>
+            <h2>Student's Grade</h2>
+
+            <ul id="studentGrades"></ul>
+        </div>
+
+        <div>
+            <h2>Student Who Passed</h2>
+            <ul id="studentPassedList"></ul>
+        </div>
+
+        <div>
+            <h2>Student Who Failed</h2>
+            <ul id="studentFailedList"></ul>
+        </div>
+
+    </div>
+</body>
+
+<script src="scripts.js"></script>
+
+</html>
