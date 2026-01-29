@@ -201,6 +201,10 @@ tr:hover {
 }
 
 @media (max-width: 768px) {
+    #form {
+        min-height: 85vh;
+    }
+
     #form h1 {
         font-size: 2.5em;
     }
@@ -239,6 +243,9 @@ tr:hover {
 }
 
 @media (max-width: 480px) {
+
+
+
     #form h1 {
         font-size: 2em;
     }
