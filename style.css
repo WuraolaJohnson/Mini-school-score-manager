@@ -1,0 +1,257 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: CoromantGaramond;
+}
+
+@font-face {
+    font-family: CoromantGaramond;
+    src: url(fonts/CormorantGaramond-VariableFont_wght.ttf);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    padding: 1em;
+}
+
+#form h1 {
+    font-size: 4rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+#studentForm {
+    display: flex;
+    padding: 1em;
+    width: 60%;
+    gap: .5em;
+    /* background: rgba(255, 255, 255, 0.1); */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#studentForm>* {
+    padding: .8em;
+    font-size: 1em;
+    border-radius: .3em;
+    border: 0;
+    font-family: CoromantGaramond;
+}
+
+#studentForm input {
+    background: white;
+    color: black;
+}
+
+#studentForm input[type="text"] {
+    flex-grow: 1;
+}
+
+#studentForm input[type="number"] {
+    width: 30%;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#studentForm button {
+    background-image: linear-gradient(to right top, #ff6d4a, #ff7848, #ff8347, #ff8d46, #ff9747);
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 900;
+    border: 0;
+    font-family: CoromantGaramond;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#studentForm button:hover {
+    cursor: pointer;
+}
+
+.btnCon {
+    background-color: #fff;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .3em;
+}
+
+.listCon {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 100%;
+    padding: 2em 0;
+}
+
+.sublist {
+    display: flex;
+    gap: 2em;
+    width: 100%;
+}
+
+.sublist>div {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px 2px rgba(10, 10, 10, 0.2);
+}
+
+.sublist h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5em;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.5em 0 1em 0;
+    font-size: 1.2em;
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.8em;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+td {
+    padding: 0.8em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Grade Colors */
+.pass {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.fail {
+    color: #F44336;
+    font-weight: bold;
+}
+
+/* Average Score */
+#average {
+    font-size: 1.5em;
+    font-style: italic;
+    text-align: center;
+    margin-top: 1em;
+    padding: 0.8em;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border-left: 4px solid #ff9747;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .sublist {
+        flex-direction: column;
+    }
+
+    .sublist>div {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #form h1 {
+        font-size: 2.5em;
+    }
+
+    #studentForm {
+        flex-direction: column;
+        width: 90%;
+        align-items: center;
+    }
+
+    #studentForm input[type='number'],
+    #studentForm input[type="text"] {
+        width: 100%;
+    }
+
+    .btnCon {
+        width: 30%;
+    }
+
+    table {
+        font-size: 1em;
+    }
+
+    th,
+    td {
+        padding: 0.5em;
+    }
+
+    .sublist h2 {
+        font-size: 2em;
+    }
+
+    #average {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    #form h1 {
+        font-size: 2em;
+    }
+
+    .sublist h2 {
+        font-size: 1.5em;
+    }
+
+    .btnCon {
+        width: 100%;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+}

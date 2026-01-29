@@ -5,45 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Score Manager</title>
-
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div>
-        <p id="display"></p>
-    </div>
-    <div>
-        <h1>Student Registration Form</h1>
-        <form id="studentForm">
-            <input type="text" id="name" placeholder="Student Name" required />
-            <input type="number" id="score" placeholder="Score" required />
-            <button type="submit">Add Student</button>
-        </form>
-
-        <div>
-            <h2>Student Full List and Score</h2>
-            <ul id="studentList"></ul>
-            <h4 id="average"></h4>
+    <main>
+        <div id="form">
+            <h1>Student Registration Form</h1>
+            <form id="studentForm">
+                <input type="text" id="name" autocomplete="additional-name" placeholder="Student Name" required />
+                <input type="number" max="100" id="score" placeholder="Score" required />
+                <div class="btnCon"><button type="submit">Add Student</button></div>
+            </form>
         </div>
 
-        <div>
-            <h2>Student's Grade</h2>
+        <div class="listCon">
+            <div class="sublist sl1">
+                <div>
+                    <h2>Student List & Scores</h2>
+                    <table id="studentTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentList">
 
-            <ul id="studentGrades"></ul>
+                        </tbody>
+                    </table>
+                    <h4 id="average">Average Score: 0.00</h4>
+                </div>
+
+                <div>
+                    <h2>Passed Students</h2>
+                    <table id="passedTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentPassedList">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sublist sl2">
+                <div>
+                    <h2>Failed Students</h2>
+                    <table id="failedTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentFailedList">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <h2>Student Who Passed</h2>
-            <ul id="studentPassedList"></ul>
-        </div>
-
-        <div>
-            <h2>Student Who Failed</h2>
-            <ul id="studentFailedList"></ul>
-        </div>
-
-    </div>
+    </main>
 </body>
 
 <script src="scripts.js"></script>

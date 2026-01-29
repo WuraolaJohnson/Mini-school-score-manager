@@ -7,95 +7,72 @@ const students = [
     { name: "Peter", score: 57 }
 ];
 
-// Getting form and UI elements from the HTML
 const form = document.getElementById("studentForm");
-const studentList = document.getElementById("studentList");
+const studentTable = document.getElementById("studentList");
 const averageScore = document.getElementById("average");
+const studentPassedTable = document.getElementById("studentPassedList");
+const studentFailedTable = document.getElementById("studentFailedList");
 
-const studentGrades = document.getElementById("studentGrades");
-const studentPassedList = document.getElementById("studentPassedList");
-const studentFailedList = document.getElementById("studentFailedList");
-
-// Display all students and their scores
 const displayStudents = () => {
-    studentList.innerHTML = ""; // clear the list first
+    studentTable.innerHTML = "";
 
-    students.forEach(student => {
-        const li = document.createElement("li");
-        li.textContent = `${student.name} - ${student.score}`;
-        studentList.appendChild(li);
+    students.forEach((student, index) => {
+        const grade = student.score >= 50 ? "Pass" : "Fail";
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${index + 1}.</td>
+            <td>${student.name}</td>
+            <td>${student.score}</td>
+            <td class="${grade.toLowerCase()}">${grade}</td>
+        `;
+
+        studentTable.appendChild(row);
     });
 };
 
-// Display students with their pass/fail grade
-function displayStudentsGrade(gradedStudents) {
-    studentGrades.innerHTML = ""; // clear previous grades
+const displayPassedStudents = () => {
+    studentPassedTable.innerHTML = "";
 
-    gradedStudents.forEach(gradeStu => {
-        const li = document.createElement("li");
-        li.textContent = `${gradeStu.student.name} - ${gradeStu.grade}`;
-        studentGrades.appendChild(li);
-    });
-}
+    const passedStudents = students
+        .filter(student => student.score >= 50)
+        .map((student, index) => ({ ...student, index: index + 1 }));
 
-// This will store students after grading
-let gradedStudents = [];
+    passedStudents.forEach((student, displayIndex) => {
+        const row = document.createElement("tr");
 
-// Add Pass or Fail grade to each student
-const updateGradedStudents = () => {
-    gradedStudents = students.map(student => ({
-        student,
-        grade: student.score >= 50 ? "Pass" : "Fail"
-    }));
-};
+        row.innerHTML = `
+            <td>${displayIndex + 1}.</td>
+            <td>${student.name}</td>
+            <td class="pass">Pass</td>
+        `;
 
-// Display only passed students
-function displayPassedStudents(studentPassed) {
-    studentPassedList.innerHTML = ""; // clear list
-
-    studentPassed.forEach(pass => {
-        const li = document.createElement("li");
-        li.textContent = `${pass.student.name} - Passed`;
-        studentPassedList.appendChild(li);
+        studentPassedTable.appendChild(row);
     });
 };
 
-// Store passed students here
-let studentPassed = [];
+const displayFailedStudents = () => {
+    studentFailedTable.innerHTML = "";
 
-// Filter students that passed
-const passedStudents = () => {
-    studentPassed = gradedStudents.filter(student => student.grade === "Pass");
+    const failedStudents = students
+        .filter(student => student.score < 50)
+        .map((student, index) => ({ ...student, index: index + 1 }));
+
+    failedStudents.forEach((student, displayIndex) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${displayIndex + 1}.</td>
+            <td>${student.name}</td>
+            <td class="fail">Fail</td>
+        `;
+
+        studentFailedTable.appendChild(row);
+    });
 };
 
-// Store failed students here
-let studentFailed = [];
-
-// Display only failed students (using splice for learning purpose)
-function displayFailedStudents(studentFailed) {
-    studentFailedList.innerHTML = ""; // clear list
-
-    // copy graded students
-    studentFailed = gradedStudents;
-
-    // remove passed students so only failed remain
-    for (let i = studentFailed.length - 1; i >= 0; i--) {
-        if (studentFailed[i].grade === "Pass") {
-            studentFailed.splice(i, 1);
-        }
-    }
-
-    // show failed students on the page
-    studentFailed.forEach(fail => {
-        const li = document.createElement("li");
-        li.textContent = `${fail.student.name} - Failed`;
-        studentFailedList.appendChild(li);
-    });
-}
-
-// Calculate average score using reduce
 const calculateAverageScore = () => {
-    if (students.length === 0) return 0; // safety check
+    if (students.length === 0) return 0;
 
     return students.reduce(
         (total, student) => total + student.score,
@@ -103,50 +80,42 @@ const calculateAverageScore = () => {
     ) / students.length;
 };
 
-// Display average score on the page
 const displayAverageScore = () => {
     const average = calculateAverageScore();
     averageScore.textContent = `Average Score: ${average.toFixed(2)}`;
+
 };
 
-// Handle form submission (adding a new student)
 form.addEventListener("submit", (event) => {
-    event.preventDefault(); // stop page refresh
+    event.preventDefault();
 
-    const name = document.getElementById("name").value;
+    const name = document.getElementById("name").value.trim();
     const score = Number(document.getElementById("score").value);
 
-    // add new student to the array
+
+    if (score < 0 || score > 100) {
+        alert("Please enter a score between 0 and 100");
+        return;
+    }
+
+    if (!name) {
+        alert("Please enter a student name");
+        return;
+    }
+
     students.push({ name, score });
 
-    // update everything on the page
+
     displayStudents();
     displayAverageScore();
+    displayPassedStudents();
+    displayFailedStudents();
 
-    updateGradedStudents();
-    displayStudentsGrade(gradedStudents);
-
-    passedStudents();
-    displayPassedStudents(studentPassed);
-
-    displayFailedStudents(studentFailed);
-
-    form.reset(); // clear the form after submit
-
-    // log average score (just for debugging)
-    const averageScore = students.reduce(
-        (total, student) => total + student.score,
-        0
-    ) / students.length;
-
-    console.log(averageScore);
+    form.reset();
 });
 
-// Run everything once when the page loads
+
 displayStudents();
-updateGradedStudents();
 displayAverageScore();
-displayStudentsGrade(gradedStudents);
-passedStudents();
-displayPassedStudents(studentPassed);
-displayFailedStudents(studentFailed);
+displayPassedStudents();
+displayFailedStudents();
